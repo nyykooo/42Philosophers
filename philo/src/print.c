@@ -6,7 +6,7 @@
 /*   By: ncampbel <ncampbel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 15:47:21 by ncampbel          #+#    #+#             */
-/*   Updated: 2024/09/17 16:27:54 by ncampbel         ###   ########.fr       */
+/*   Updated: 2024/09/17 23:41:44 by ncampbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_death_eaten(t_table *table, int name)
 	real_name = name + 1;
 	pthread_mutex_lock(&table->print_message);
 	printf("%ld %d died\n", ft_gettimeofday_ms() - table->t_start,
-		table->philo->name);
+		table->philo[name].name);
 	table->all_alive = false;
 	pthread_mutex_unlock(&table->print_message);
 	pthread_mutex_unlock(&table->philo[name].body);
