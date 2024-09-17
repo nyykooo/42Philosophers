@@ -6,7 +6,7 @@
 /*   By: ncampbel <ncampbel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 22:14:17 by ncampbel          #+#    #+#             */
-/*   Updated: 2024/09/11 15:33:26 by ncampbel         ###   ########.fr       */
+/*   Updated: 2024/09/17 14:43:56 by ncampbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ typedef struct s_philo
 	unsigned long	t_die;
 	unsigned long	t_eat;
 	unsigned long	t_sleep;
-	// unsigned long	t_think;
-	// unsigned long	t_last_meal;
+	unsigned long	t_think;
+	unsigned long	t_last_meal;
+	unsigned long	t_start;
 	int				amount_eat;
 	int				name;
 	bool			is_awake;
@@ -45,8 +46,11 @@ typedef struct s_table
 	unsigned long	t_die;
 	unsigned long	t_eat;
 	unsigned long	t_sleep;
+	unsigned long	t_think;
+	unsigned long	t_start;
 	int				amount_eat;
 	unsigned int	n_philo;
+	bool			start_dinner;
 	bool			all_alive;
 	bool			all_eaten;
 	pthread_mutex_t	may_we;

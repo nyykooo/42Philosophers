@@ -6,7 +6,7 @@
 /*   By: ncampbel <ncampbel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 13:03:25 by ncampbel          #+#    #+#             */
-/*   Updated: 2024/09/11 15:55:50 by ncampbel         ###   ########.fr       */
+/*   Updated: 2024/09/16 20:20:56 by ncampbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static void	ft_clear_philos(t_table *table)
 	while (i < table->n_philo && &table->philo[i])
 	{
 		pthread_mutex_destroy(&table->philo[i].body);
-		ft_print_log(table->philo[i].name, table, "has died", 100);
 		i++;
 	}
 }
@@ -33,7 +32,6 @@ static void	ft_clear_forks(t_table *table)
 	while (i < table->n_philo && table->fork[i].exist)
 	{
 		pthread_mutex_destroy(&table->fork[i].fork);
-		ft_print_log(table->fork[i].id, table, "fork has been destroyed", 101);
 		i++;
 	}
 }
