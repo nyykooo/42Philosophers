@@ -6,7 +6,7 @@
 #    By: ncampbel <ncampbel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/19 22:06:25 by ncampbel          #+#    #+#              #
-#    Updated: 2024/09/17 15:15:24 by ncampbel         ###   ########.fr        #
+#    Updated: 2024/09/18 14:49:25 by ncampbel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME= philo
 
 CC= cc
 
-FLAGS= -Wall -Wextra -Werror -g
+CFLAGS= -Wall -Wextra -Werror -g
 
 LDFLAGS = -lpthread
 

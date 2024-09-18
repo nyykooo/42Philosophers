@@ -6,11 +6,17 @@
 /*   By: ncampbel <ncampbel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:22:04 by ncampbel          #+#    #+#             */
-/*   Updated: 2024/09/17 16:40:32 by ncampbel         ###   ########.fr       */
+/*   Updated: 2024/09/18 14:52:40 by ncampbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/headers.h"
+
+static void	ft_start_together(t_table *table)
+{
+		pthread_mutex_lock(&table->may_we);
+		pthread_mutex_unlock(&table->may_we);
+}
 
 static void	ft_synchornize(t_philo *philo)
 {
@@ -41,8 +47,11 @@ static void	ft_habits(t_philo *philo)
 void	*ft_mind_hub(void *philosopher)
 {
 	t_philo		*philo;
+	t_table		*table;
 
 	philo = (t_philo *)philosopher;
+	table = philo->table;
+	ft_start_together(table);
 	ft_synchornize(philo);
 	ft_habits(philo);
 	return (NULL);
@@ -78,9 +87,10 @@ static bool	ft_init_philo(t_philo *philo, t_table *table, int name)
 
 void	ft_create_philo(t_table *table)
 {
-	int	i;
+	unsigned int	i;
 
 	i = 0;
+	pthread_mutex_lock(&table->may_we);
 	while (i < table->n_philo)
 	{
 		if (ft_init_philo(&table->philo[i], table, i) == false)
@@ -90,4 +100,5 @@ void	ft_create_philo(t_table *table)
 		}
 		i++;
 	}
+	pthread_mutex_unlock(&table->may_we);
 }
