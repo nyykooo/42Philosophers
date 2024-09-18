@@ -6,7 +6,7 @@
 /*   By: ncampbel <ncampbel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:22:04 by ncampbel          #+#    #+#             */
-/*   Updated: 2024/09/18 14:52:40 by ncampbel         ###   ########.fr       */
+/*   Updated: 2024/09/18 15:46:28 by ncampbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,16 @@
 
 static void	ft_start_together(t_table *table)
 {
+	while (1)
+	{
 		pthread_mutex_lock(&table->may_we);
+		if (table->start_dinner == true)
+		{
+			pthread_mutex_unlock(&table->may_we);
+			return ;
+		}
 		pthread_mutex_unlock(&table->may_we);
+	}
 }
 
 static void	ft_synchornize(t_philo *philo)
@@ -67,7 +75,6 @@ static bool	ft_init_philo(t_philo *philo, t_table *table, int name)
 	philo->t_last_meal = table->t_start;
 	philo->amount_eat = table->amount_eat;
 	philo->name = name + 1;
-	philo->is_awake = true;
 	philo->stop = false;
 	philo->l_fork = &table->fork[name];
 	if ((unsigned int)philo->name == table->n_philo && table->n_philo != 1)
@@ -90,7 +97,6 @@ void	ft_create_philo(t_table *table)
 	unsigned int	i;
 
 	i = 0;
-	pthread_mutex_lock(&table->may_we);
 	while (i < table->n_philo)
 	{
 		if (ft_init_philo(&table->philo[i], table, i) == false)
@@ -100,5 +106,8 @@ void	ft_create_philo(t_table *table)
 		}
 		i++;
 	}
+	pthread_mutex_lock(&table->may_we);
+	table->start_dinner = true;
+	table->t_start = ft_gettimeofday_ms();
 	pthread_mutex_unlock(&table->may_we);
 }

@@ -6,7 +6,7 @@
 /*   By: ncampbel <ncampbel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 22:14:17 by ncampbel          #+#    #+#             */
-/*   Updated: 2024/09/17 14:43:56 by ncampbel         ###   ########.fr       */
+/*   Updated: 2024/09/18 15:20:54 by ncampbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ typedef struct s_philo
 	unsigned long	t_start;
 	int				amount_eat;
 	int				name;
-	bool			is_awake;
 	bool			stop;
 	t_fork			*l_fork;
 	t_fork			*r_fork;
