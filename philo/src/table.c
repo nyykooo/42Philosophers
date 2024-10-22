@@ -6,7 +6,7 @@
 /*   By: ncampbel <ncampbel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 22:12:50 by ncampbel          #+#    #+#             */
-/*   Updated: 2024/09/18 15:42:12 by ncampbel         ###   ########.fr       */
+/*   Updated: 2024/09/18 23:25:18 by ncampbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,29 @@ static void	ft_wait_threads(t_table *table)
 		pthread_join(table->philo[i++].mind, NULL);
 }
 
+static void	ft_amount_to_eat(t_table *table, unsigned int i, unsigned int *n)
+{
+	if (table->philo[i].amount_eat == 0)
+		*n += 1;
+	if (*n == table->n_philo)
+		table->all_eaten = true;
+}
+
 static void	ft_check_4deaths(t_table *table)
 {
 	unsigned int	i;
 	unsigned int	n;
 
+	usleep(6000);
 	while (table->all_alive == true && table->all_eaten == false)
 	{
 		i = 0;
 		n = 0;
 		while (i < table->n_philo)
 		{
+			usleep(1000);
 			pthread_mutex_lock(&table->philo[i].body);
-			if (table->philo[i].amount_eat == 0)
-				n++;
-			if (n == table->n_philo)
-				table->all_eaten = true;
+			ft_amount_to_eat(table, i, &n);
 			if ((table->philo[i].amount_eat == -1
 					|| table->philo[i].amount_eat > 0) && (ft_gettimeofday_ms()
 					- table->philo[i].t_last_meal > table->t_die))
@@ -48,34 +55,6 @@ static void	ft_check_4deaths(t_table *table)
 			i++;
 		}
 	}
-}
-
-static void	ft_init_table(t_table *table, char **av)
-{
-	table->n_philo = ft_atoi(av[1]);
-	table->t_die = ft_atoul(av[2]);
-	table->t_eat = ft_atoul(av[3]);
-	table->t_sleep = ft_atoul(av[4]);
-	table->t_think = ft_get_time_think(table);
-	table->amount_eat = -1;
-	table->all_alive = true;
-	table->all_eaten = false;
-	table->start_dinner = false;
-	if (av[5])
-		table->amount_eat = ft_atoi(av[5]);
-	if (pthread_mutex_init(&table->may_we, NULL) != 0
-		|| pthread_mutex_init(&table->print_message, NULL) != 0)
-	{
-		ft_exit(table);
-		return ;
-	}
-	table->philo = (t_philo *)malloc(sizeof(t_philo) * table->n_philo);
-	if (!table->philo)
-		ft_exit(table);
-	table->fork = (t_fork *)malloc(sizeof(t_fork) * table->n_philo);
-	if (!table->fork)
-		ft_exit(table);
-	table->t_start = ft_gettimeofday_ms();
 }
 
 static bool	ft_parse_input(int ac, char **av)

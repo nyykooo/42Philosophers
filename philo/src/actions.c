@@ -6,7 +6,7 @@
 /*   By: ncampbel <ncampbel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 21:22:55 by ncampbel          #+#    #+#             */
-/*   Updated: 2024/09/18 15:47:05 by ncampbel         ###   ########.fr       */
+/*   Updated: 2024/09/18 23:19:36 by ncampbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,6 @@ void	ft_sleeping(t_philo *philo)
 
 void	ft_thinking(t_philo *philo)
 {
-	ft_print_log(philo, "is thinking", ft_gettimeofday_ms());\
+	ft_print_log(philo, "is thinking", ft_gettimeofday_ms());
 	ft_better_you_sleep(philo->t_think, philo);
 }

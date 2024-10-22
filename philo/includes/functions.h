@@ -6,7 +6,7 @@
 /*   By: ncampbel <ncampbel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 22:14:22 by ncampbel          #+#    #+#             */
-/*   Updated: 2024/09/17 16:33:48 by ncampbel         ###   ########.fr       */
+/*   Updated: 2024/09/18 21:32:19 by ncampbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void			ft_check_forks(t_philo *philo);
 
 // PHILO FUNCTIONS
 void			ft_create_philo(t_table *table);
+void			*ft_mind_hub(void *philosopher);
 
 // EXIT FUNCTIONS
 void			ft_exit(t_table *table);
@@ -43,5 +44,10 @@ void			ft_print_log(t_philo *philo, char *message, unsigned long time);
 unsigned long	ft_gettimeofday_ms(void);
 unsigned long	ft_get_time_think(t_table *table);
 void			ft_better_you_sleep(unsigned long delay_ms, t_philo *philo);
+
+// INIT FUNCTIONS
+bool			ft_init_forks(t_fork *fork, int name);
+void			ft_init_table(t_table *table, char **av);
+bool			ft_init_philo(t_philo *philo, t_table *table, int name);
 
 #endif

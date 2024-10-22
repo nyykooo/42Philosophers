@@ -6,21 +6,11 @@
 /*   By: ncampbel <ncampbel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:22:02 by ncampbel          #+#    #+#             */
-/*   Updated: 2024/09/18 15:47:15 by ncampbel         ###   ########.fr       */
+/*   Updated: 2024/09/18 21:30:49 by ncampbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/headers.h"
-
-static bool	ft_init_forks(t_fork *fork, int name)
-{
-	fork->id = name;
-	fork->exist = false;
-	if (pthread_mutex_init(&fork->fork, NULL) != 0)
-		return (false);
-	fork->exist = true;
-	return (true);
-}
 
 void	ft_create_forks(t_table *table)
 {

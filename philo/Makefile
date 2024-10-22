@@ -6,7 +6,7 @@
 #    By: ncampbel <ncampbel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/19 22:06:25 by ncampbel          #+#    #+#              #
-#    Updated: 2024/09/18 14:49:25 by ncampbel         ###   ########.fr        #
+#    Updated: 2024/09/18 23:27:59 by ncampbel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ LDFLAGS = -lpthread
 
 VALFLAGS= -Wall -Wextra -Werror -g
 
-SRC_DIR = table fork philo exit checks print time actions
+SRC_DIR = table fork philo exit checks print time actions init
 
 SRC = $(addsuffix .c, $(addprefix src/, $(SRC_DIR)))
 
@@ -41,7 +41,7 @@ re: fclean all
 
 valgrind: fclean $(OBJ)
 		$(CC) $(VALFLAGS) $(OBJ) -o $(NAME) $(LDFLAGS);
-		valgrind --tool=helgrind ./${NAME} 5 610 200 200
+		valgrind --tool=helgrind ./${NAME} 3 610 200 200 10
 
 .PHONY: all clean fclean re
 
